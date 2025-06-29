@@ -12,3 +12,4 @@ Simple, interpretable models like Logistic Regression with Weight of Evidence (W
 
 Complex models like Gradient Boosting Machines (GBM) often deliver higher predictive performance but risk being opaque, harder to validate, and less accepted by regulators without model explainability tools (e.g., SHAP).
 Thus, institutions often favor interpretable models in production, using complex models in parallel for challenger testing or score enhancement, balancing compliance, trust, and accuracy.
+
