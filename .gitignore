@@ -1,1 +1,5 @@
 /data/
+*.csv
+*.ipynb_checkpoints/
+*.pkl
+/venv 
