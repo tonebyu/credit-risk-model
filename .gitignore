@@ -1,5 +1,2 @@
 /data/
-# Ignore all files in the data directory
-*.csv       
 /venv/
-# Ignore all CSV files in the data directory  
