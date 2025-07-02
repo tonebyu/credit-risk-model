@@ -1,9 +1,2 @@
 /data/
-<<<<<<< HEAD
 /venv/
-=======
-*.csv
-*.ipynb_checkpoints/
-*.pkl
-/venv 
->>>>>>> 8d72c230f7aef87addee55c7c985bfd0d6993bbd
