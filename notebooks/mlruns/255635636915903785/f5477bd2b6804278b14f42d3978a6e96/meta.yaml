@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/ssss/Desktop/%23%23%2010%20Acadamy/Week5/credit-risk-model/notebooks/mlruns/255635636915903785/f5477bd2b6804278b14f42d3978a6e96/artifacts
+end_time: 1751551813215
+entry_point_name: ''
+experiment_id: '255635636915903785'
+lifecycle_stage: active
+run_id: f5477bd2b6804278b14f42d3978a6e96
+run_name: LogisticRegression-experiment
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751551781686
+status: 3
+tags: []
+user_id: ssss

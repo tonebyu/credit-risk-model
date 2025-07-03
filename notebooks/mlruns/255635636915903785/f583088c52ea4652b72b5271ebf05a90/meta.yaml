@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/ssss/Desktop/%23%23%2010%20Acadamy/Week5/credit-risk-model/notebooks/mlruns/255635636915903785/f583088c52ea4652b72b5271ebf05a90/artifacts
+end_time: 1751553969995
+entry_point_name: ''
+experiment_id: '255635636915903785'
+lifecycle_stage: active
+run_id: f583088c52ea4652b72b5271ebf05a90
+run_name: RandomForest-experiment
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751553946344
+status: 3
+tags: []
+user_id: ssss
