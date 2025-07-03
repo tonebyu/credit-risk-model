@@ -1,8 +1,9 @@
 /data/
 /venv/
-
 *.csv
 *.ipynb_checkpoints/
 *.pkl
 __pycache__/
 *.pyc
+/data/
+/venv/

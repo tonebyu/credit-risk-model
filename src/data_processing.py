@@ -58,23 +58,49 @@ def build_pipeline(numeric_features, categorical_features):
 
 def process_and_save_data(input_csv_path, output_csv_path):
     df = pd.read_csv(input_csv_path)
+
+    # Step 1: Add date-time features
     df = DateFeatureExtractor().fit_transform(df)
+
+    # Step 2: Aggregate numeric features per customer
     agg_df = CustomerAggregator().fit_transform(df)
 
-    numeric_features = ['total_value', 'avg_value', 'std_value', 'transaction_count',
-                        'total_amount', 'avg_amount', 'std_amount']
+    # Step 3: Get latest transaction categorical + timestamp info
     categorical_features = ['CurrencyCode', 'CountryCode', 'ProviderId', 'ProductId',
                             'ProductCategory', 'ChannelId', 'PricingStrategy', 'FraudResult']
+    latest_tx = df.sort_values(by='TransactionStartTime').groupby('CustomerId').last().reset_index()
 
+    # Step 4: Merge aggregated data with latest context + TransactionStartTime
+    merged_df = pd.merge(
+        agg_df,
+        latest_tx[['CustomerId'] + categorical_features + ['TransactionStartTime']],
+        on='CustomerId',
+        how='left'
+    )
+
+    # Step 5: Define numeric features
+    numeric_features = ['total_value', 'avg_value', 'std_value', 'transaction_count',
+                        'total_amount', 'avg_amount', 'std_amount']
+
+    # Step 6: Build transformation pipeline
     pipeline = build_pipeline(numeric_features, categorical_features)
 
-    latest_tx = df.sort_values(by='TransactionStartTime').groupby('CustomerId').last().reset_index()
-    merged_df = pd.merge(agg_df, latest_tx[categorical_features + ['CustomerId']], on='CustomerId', how='left')
-
+    # Step 7: Transform data
     transformed_data = pipeline.fit_transform(merged_df)
 
-    os.makedirs(os.path.dirname(output_csv_path), exist_ok=True)
-    pd.DataFrame(transformed_data.toarray() if hasattr(transformed_data, 'toarray') else transformed_data)\
-        .to_csv(output_csv_path, index=False)
+     # Step 8: Build DataFrame with headers
+    cat_encoded_cols = pipeline.named_transformers_['cat']['encoder'].get_feature_names_out(categorical_features)
+    final_columns = numeric_features + list(cat_encoded_cols)
 
+    # Convert to dense array if it's sparse
+    if hasattr(transformed_data, 'toarray'):
+        transformed_data = transformed_data.toarray()
+
+    df_final = pd.DataFrame(transformed_data, columns=final_columns)
+    df_final.insert(0, 'CustomerId', merged_df['CustomerId'].values)
+    df_final['TransactionStartTime'] = merged_df['TransactionStartTime']
+    
+    # Step 9: Save output
+    os.makedirs(os.path.dirname(output_csv_path), exist_ok=True)
+    df_final.to_csv(output_csv_path, index=False)
     print(f"✅ Processed data saved to {output_csv_path}")
