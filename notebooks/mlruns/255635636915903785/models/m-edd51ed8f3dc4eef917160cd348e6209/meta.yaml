@@ -1,0 +1,11 @@
+artifact_location: file:///c:/Users/ssss/Desktop/%23%23%2010%20Acadamy/Week5/credit-risk-model/notebooks/mlruns/255635636915903785/models/m-edd51ed8f3dc4eef917160cd348e6209/artifacts
+creation_timestamp: 1751553852794
+experiment_id: '255635636915903785'
+last_updated_timestamp: 1751553852794
+lifecycle_stage: active
+model_id: m-edd51ed8f3dc4eef917160cd348e6209
+model_type: null
+name: model
+source_run_id: 989662aa1c864b639f1c010f5a226b53
+status: 1
+status_message: null
